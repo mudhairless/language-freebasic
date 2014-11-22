@@ -5,7 +5,7 @@
         "bi"
     ],
     "firstLineMatch": "-[*]-( Mode:)? FreeBASIC -[*]-",
-    "name": "C",
+    "name": "FreeBASIC",
     "patterns": [
         {
             "include": "#preprocessor-rule-enabled"
