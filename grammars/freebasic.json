@@ -20,7 +20,7 @@
             "include": "#comments"
         },
         {
-            "match": "\\b(break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while)\\b",
+            "match": "\\b(end|case|continue|default|do|else|for|goto|if|return|select|wend|with|while)\\b",
             "name": "keyword.control.freebasic"
         },
         {
@@ -129,7 +129,7 @@
             ]
         },
         {
-            "begin": "^\\s*#\\s*(include|import)\\b\\s+",
+            "begin": "^\\s*#\\s*(include)\\b\\s+",
             "captures": {
                 "1": {
                     "name": "keyword.control.import.include.freebasic"
@@ -156,21 +156,6 @@
                         }
                     },
                     "name": "string.quoted.double.include.freebasic"
-                },
-                {
-                    "begin": "<",
-                    "beginCaptures": {
-                        "0": {
-                            "name": "punctuation.definition.string.begin.freebasic"
-                        }
-                    },
-                    "end": ">",
-                    "endCaptures": {
-                        "0": {
-                            "name": "punctuation.definition.string.end.freebasic"
-                        }
-                    },
-                    "name": "string.quoted.other.lt-gt.include.freebasic"
                 }
             ]
         },
@@ -178,7 +163,7 @@
             "include": "#pragma-mark"
         },
         {
-            "begin": "^\\s*#\\s*(define|defined|elif|else|if|ifdef|ifndef|line|pragma|undef)\\b",
+            "begin": "^\\s*#\\s*(define|defined|elseif|else|if|ifdef|ifndef|line|pragma|undef|print|error|inclib|macro|endmacro)\\b",
             "captures": {
                 "1": {
                     "name": "keyword.control.import.freebasic"

@@ -2,7 +2,7 @@
   "name": "language-freebasic",
   "version": "0.0.0",
   "description": "FreeBASIC Language Support for Atom",
-  "repository": "https://github.com/atom/language-freebasic",
+  "repository": "https://github.com/mudhairless/language-freebasic",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
