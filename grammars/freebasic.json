@@ -20,7 +20,7 @@
             "include": "#comments"
         },
         {
-            "match": "\\b(declare|dim|var|end|case|continue|default|do|loop|else|for|goto|if|elseif|then|end if|return|next|function|sub|until|select|wend|with|while|as)\\b",
+            "match": "\\b(namespace|declare|dim|var|end|case|continue|default|do|loop|else|for|goto|if|elseif|then|end if|return|next|function|sub|until|select|wend|with|while|as)\\b",
             "name": "keyword.control.freebasic"
         },
         {
