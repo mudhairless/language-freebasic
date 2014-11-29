@@ -20,7 +20,7 @@
             "include": "#comments"
         },
         {
-            "match": "\\b(dim|var|end|case|continue|default|do|loop|else|for|goto|if|elseif|then|end if|return|next|function|sub|until|select|wend|with|while|as)\\b",
+            "match": "\\b(declare|dim|var|end|case|continue|default|do|loop|else|for|goto|if|elseif|then|end if|return|next|function|sub|until|select|wend|with|while|as)\\b",
             "name": "keyword.control.freebasic"
         },
         {
@@ -28,7 +28,7 @@
             "name": "storage.type.freebasic"
         },
         {
-            "match": "\\b(const|extern|static)\\b",
+            "match": "\\b(const|extern|static|byval|byref|bydesc)\\b",
             "name": "storage.modifier.freebasic"
         },
         {
@@ -285,6 +285,9 @@
                     },
                     {
                         "include": "#libc"
+                    },
+                    {
+                        "include": "#libfb"
                     },
                     {
                         "include": "#c_function_call"
