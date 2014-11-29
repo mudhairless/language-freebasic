@@ -20,11 +20,11 @@
             "include": "#comments"
         },
         {
-            "match": "\\b(end|case|continue|default|do|else|for|goto|if|return|select|wend|with|while)\\b",
+            "match": "\\b(end|case|continue|default|do|else|for|goto|if|then|end if|return|select|wend|with|while|as)\\b",
             "name": "keyword.control.freebasic"
         },
         {
-            "match": "\\b(byte|ubyte|short|ushort|integer|uinteger|long|ulong|longint|ulongint|double|single|any)\\b",
+            "match": "\\b(pointer|POINTER|ptr|PTR|unsigned|UNSIGNED)\\b",
             "name": "storage.type.freebasic"
         },
         {
@@ -163,7 +163,7 @@
             "include": "#pragma-mark"
         },
         {
-            "begin": "^\\s*#\\s*(define|defined|elseif|else|if|ifdef|ifndef|line|pragma|undef|print|error|inclib|macro|endmacro)\\b",
+            "begin": "^\\s*#\\s*(assert|libpath|lang|define|defined|elseif|else|if|ifdef|ifndef|line|pragma|undef|print|error|inclib|macro|endmacro)\\b",
             "captures": {
                 "1": {
                     "name": "keyword.control.import.freebasic"
@@ -179,7 +179,7 @@
             ]
         },
         {
-            "match": "\\b(u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t)\\b",
+            "match": "\\b(byte|ubyte|short|ushort|integer|uinteger|long|ulong|longint|ulongint|double|single|object|any|string|zstring|wstring)\\b",
             "name": "support.type.sys-types.freebasic"
         },
         {
@@ -191,14 +191,6 @@
             "name": "support.type.stdint.freebasic"
         },
         {
-            "match": "\\b(noErr|kNilOptions|kInvalidID|kVariableLengthArray)\\b",
-            "name": "support.constant.mac-classic.freebasic"
-        },
-        {
-            "match": "\\b(AbsoluteTime|Boolean|Byte|ByteCount|ByteOffset|BytePtr|CompTimeValue|ConstLogicalAddress|ConstStrFileNameParam|ConstStringPtr|Duration|Fixed|FixedPtr|Float32|Float32Point|Float64|Float80|Float96|FourCharCode|Fract|FractPtr|Handle|ItemCount|LogicalAddress|OptionBits|OSErr|OSStatus|OSType|OSTypePtr|PhysicalAddress|ProcessSerialNumber|ProcessSerialNumberPtr|ProcHandle|Ptr|ResType|ResTypePtr|ShortFixed|ShortFixedPtr|SignedByte|SInt16|SInt32|SInt64|SInt8|Size|StrFileName|StringHandle|StringPtr|TimeBase|TimeRecord|TimeScale|TimeValue|TimeValue64|UInt16|UInt32|UInt64|UInt8|UniChar|UniCharCount|UniCharCountPtr|UniCharPtr|UnicodeScalarValue|UniversalProcHandle|UniversalProcPtr|UnsignedFixed|UnsignedFixedPtr|UnsignedWide|UTF16Char|UTF32Char|UTF8Char)\\b",
-            "name": "support.type.mac-classic.freebasic"
-        },
-        {
             "comment": "Reserved POSIX types",
             "match": "\\b([a-z0-9_]+_t)\\b",
             "name": "support.type.posix-reserved.freebasic"
@@ -207,7 +199,7 @@
             "include": "#block"
         },
         {
-            "begin": "(?x)\n    \t\t(?:  ^                                 # begin-of-line\n    \t\t  |  \n    \t\t     (?: (?= \\s )           (?<!else|new|return) (?<=\\w)      #  or word + space before name\n    \t\t       | (?= \\s*[A-Za-z_] ) (?<!&&)       (?<=[*&>])   #  or type modifier before name\n    \t\t     )\n    \t\t)\n    \t\t(\\s*) (?!(while|for|do|if|else|switch|catch|enumerate|return|sizeof|[cr]?iterate)\\s*\\()\n    \t\t(\n    \t\t\t(?: [A-Za-z_][A-Za-z0-9_]*+ | :: )++ |                  # actual name\n    \t\t\t(?: (?<=operator) (?: [-*&<>=+!]+ | \\(\\) | \\[\\] ) )  # if it is a C++ operator\n    \t\t)\n    \t\t \\s*(?=\\()",
+            "begin": "(?x)\n    \t\t(?:  ^                                 # begin-of-line\n    \t\t  |  \n    \t\t     (?: (?= \\s )           (?<!else|new|return) (?<=\\w)      #  or word + space before name\n    \t\t       | (?= \\s*[A-Za-z_] ) (?<!&&)       (?<=[*&>])   #  or type modifier before name\n    \t\t     )\n    \t\t)\n    \t\t(\\s*) (?!(while|for|do|if|else|select|case|enum|return|sizeof|[cr]?iterate)\\s*\\()\n    \t\t(\n    \t\t\t(?: [A-Za-z_][A-Za-z0-9_]*+ | :: )++ |                  # actual name\n    \t\t\t(?: (?<=operator) (?: [-*&<>=+!]+ | \\(\\) | \\[\\] ) )  # if it is a C++ operator\n    \t\t)\n    \t\t \\s*(?=\\()",
             "beginCaptures": {
                 "1": {
                     "name": "punctuation.whitespace.function.leading.freebasic"
@@ -387,6 +379,17 @@
                     }
                 },
                 "match": "(\\s*)\\b(hypot(f|l)?|s(scanf|ystem|nprintf|ca(nf|lb(n(f|l)?|ln(f|l)?))|i(n(h(f|l)?|f|l)?|gn(al|bit))|tr(s(tr|pn)|nc(py|at|mp)|c(spn|hr|oll|py|at|mp)|to(imax|d|u(l(l)?|max)|k|f|l(d|l)?)|error|pbrk|ftime|len|rchr|xfrm)|printf|et(jmp|vbuf|locale|buf)|qrt(f|l)?|w(scanf|printf)|rand)|n(e(arbyint(f|l)?|xt(toward(f|l)?|after(f|l)?))|an(f|l)?)|c(s(in(h(f|l)?|f|l)?|qrt(f|l)?)|cos(h(f)?|f|l)?|imag(f|l)?|t(ime|an(h(f|l)?|f|l)?)|o(s(h(f|l)?|f|l)?|nj(f|l)?|pysign(f|l)?)|p(ow(f|l)?|roj(f|l)?)|e(il(f|l)?|xp(f|l)?)|l(o(ck|g(f|l)?)|earerr)|a(sin(h(f|l)?|f|l)?|cos(h(f|l)?|f|l)?|tan(h(f|l)?|f|l)?|lloc|rg(f|l)?|bs(f|l)?)|real(f|l)?|brt(f|l)?)|t(ime|o(upper|lower)|an(h(f|l)?|f|l)?|runc(f|l)?|gamma(f|l)?|mp(nam|file))|i(s(space|n(ormal|an)|cntrl|inf|digit|u(nordered|pper)|p(unct|rint)|finite|w(space|c(ntrl|type)|digit|upper|p(unct|rint)|lower|al(num|pha)|graph|xdigit|blank)|l(ower|ess(equal|greater)?)|al(num|pha)|gr(eater(equal)?|aph)|xdigit|blank)|logb(f|l)?|max(div|abs))|di(v|fftime)|_Exit|unget(c|wc)|p(ow(f|l)?|ut(s|c(har)?|wc(har)?)|error|rintf)|e(rf(c(f|l)?|f|l)?|x(it|p(2(f|l)?|f|l|m1(f|l)?)?))|v(s(scanf|nprintf|canf|printf|w(scanf|printf))|printf|f(scanf|printf|w(scanf|printf))|w(scanf|printf)|a_(start|copy|end|arg))|qsort|f(s(canf|e(tpos|ek))|close|tell|open|dim(f|l)?|p(classify|ut(s|c|w(s|c))|rintf)|e(holdexcept|set(e(nv|xceptflag)|round)|clearexcept|testexcept|of|updateenv|r(aiseexcept|ror)|get(e(nv|xceptflag)|round))|flush|w(scanf|ide|printf|rite)|loor(f|l)?|abs(f|l)?|get(s|c|pos|w(s|c))|re(open|e|ad|xp(f|l)?)|m(in(f|l)?|od(f|l)?|a(f|l|x(f|l)?)?))|l(d(iv|exp(f|l)?)|o(ngjmp|cal(time|econv)|g(1(p(f|l)?|0(f|l)?)|2(f|l)?|f|l|b(f|l)?)?)|abs|l(div|abs|r(int(f|l)?|ound(f|l)?))|r(int(f|l)?|ound(f|l)?)|gamma(f|l)?)|w(scanf|c(s(s(tr|pn)|nc(py|at|mp)|c(spn|hr|oll|py|at|mp)|to(imax|d|u(l(l)?|max)|k|f|l(d|l)?|mbs)|pbrk|ftime|len|r(chr|tombs)|xfrm)|to(b|mb)|rtomb)|printf|mem(set|c(hr|py|mp)|move))|a(s(sert|ctime|in(h(f|l)?|f|l)?)|cos(h(f|l)?|f|l)?|t(o(i|f|l(l)?)|exit|an(h(f|l)?|2(f|l)?|f|l)?)|b(s|ort))|g(et(s|c(har)?|env|wc(har)?)|mtime)|r(int(f|l)?|ound(f|l)?|e(name|alloc|wind|m(ove|quo(f|l)?|ainder(f|l)?))|a(nd|ise))|b(search|towc)|m(odf(f|l)?|em(set|c(hr|py|mp)|move)|ktime|alloc|b(s(init|towcs|rtowcs)|towc|len|r(towc|len))))\\b"
+            },
+            "libfb": {
+                "captures": {
+                    "1": {
+                        "name": "punctuation.whitespace.support.function.leading.freebasic"
+                    },
+                    "2": {
+                        "name": "support.function.fb10.freebasic"
+                    }
+                },
+                "match": "(\\s*)\\b(a(bs|c(c(e(ss))|os)|l(i(as)|l(o(c(a(te))))|p(ha))|n(d(a(l(so)))|y)|p(p(e(nd)))|s(s(e(r(t(w(a(rn))))))|c|in|m)|t(a(n2)|n))|b(a(se)|e(ep)|i(n(a(ry))|t(r(e(s(et)))|s(et)))|l(o(ad))|s(a(ve))|y(r(ef)|te|v(al)))|c(a(l(l(o(c(a(te)))))|s[et])|b(y(te))|d(bl|e(cl))|h(a(in)|d(ir)|r)|i(nt|r(c(le)))|l(a(ss)|e(ar)|n(g(i(nt)))|o(se)|s)|o(l(or)|m(m(a(nd)|on))|n(s(t(r(u(c(t(or))))))|d(b(r(o(a(d(c(a(st)))))))|c(r(e(a(te))))|d(e(s(t(r(oy)))))|s(i(g(n(al))))|w(a(it)))|t(i(n(ue))))|s)|p(tr)|s(h(o(rt))|i(gn)|ng|r(l(in)))|u(b(y(te))|i(nt)|l(n(g(i(nt))))|n(sg)|r(d(ir))|s(h(o(rt))|t(om)))|v(d|i|l(o(n(g(i(nt)))))|s(h(o(rt)))))|d(a(t(a|e(a(dd)|d(i(ff))|p(a(rt))|s(e(r(i(al))))|v(a(l(ue)))))|y)|e(a(l(l(o(c(a(te))))))|c(l(a(re)))|f(b(y(te))|d(bl)|i(nt)|l(n(g(i(nt))))|s(h(o(rt))|ng|tr)|u(b(y(te))|i(nt)|l(n(g(i(nt))))|s(h(o(rt)))))|l(e(te))|s(t(r(u(c(t(or)))))))|i[mr]|o(u(b(le)))|r(aw)|y(n(a(m(ic)))|l(i(b(f(r(ee))|l(o(ad))|s(y(m(b(ol)))))))))|e(l(s(e(if)))|n(c(o(d(i(ng))))|d|um|v(i(r(on))))|s(c(a(pe)))|of|qv|r(a(se)|fn|l|mn|r(or))|x(e(c|p(a(th)))|it|p(l(i(c(it)))|o(rt))|t(e(rn))))|f(a(l(se))|b(o(o(l(e(an)))))|i(e(ld)|l(e(a(t(tr))|c(o(py))|d(a(t(e(t(i(me))))))|e(x(i(s(ts))))|l(en)))|x)|l(ip)|o(r(m(at)))|r(ac|e(e(f(i(le)))))|u(n(c(t(i(on))))))|g(e(t(j(o(y(s(t(i(ck))))))|k(ey)|m(o(u(se)))))|o(s(ub)|to))|h(ex|i(b(y(te))|w(o(rd)))|o(ur))|i(f|if|m(a(g(e(c(o(n(v(e(r(t(r(ow)))))))|r(e(a(te))))|d(e(s(t(r(oy))))))))|p(o(rt)))|n(k(ey)|p(u(t$))|s(tr)|t(e(g(er))))|s(d(a(te))))|k(i(ll))|l(b(o(u(nd)))|c(a(se))|e(ft|n|t)|i(b|ne)|p(t|os|r(i(nt)))|o(b(y(te))|c(a(l|te)|k)|f|g|n(g(i(nt)))|op|w(o(rd)))|s(et)|t(r(im)))|m(i(d|n(u(te)))|k(d(ir)|i|l(o(n(g(i(nt)))))|s(h(o(rt))))|o(d|n(t(h(n(a(me))))))|u(l(t(i(k(ey))))|t(e(x(c(r(e(a(te))))|d(e(s(t(r(oy)))))|l(o(ck))|u(n(l(o(ck)))))))))|n(a(m(e(s(p(a(ce))))))|o(k(e(y(w(o(rd)))))|t|w)|e(xt|w)|u(ll))|o(ct|f(f(s(e(t(of)))))|n(ce)|p(e(n|r(a(t(or))))|t(i(on)))|r(e(l(se)))|u(t(p(ut)))|v(e(r(l(o(ad))))))|p(a(i(nt)|l(e(t(te)))|s(c(al)))|c(o(py))|e(ek)|i(pe)|m(ap)|o(i(n(t(er)))|ke|s)|r(e(s(e(r(ve)|t)))|i(nt|v(a(te)))|o(c(p(tr))|p(e(r(ty)))|t(e(c(t(ed))))))|s(et)|tr|u(b(l(ic))|t))|r(a(n(d(o(m(i(ze))))))|e(a(d|l(l(o(c(a(te))))))|d(im)|m|s(et|t(o(re))|u(me))|t(u(rn)))|g(ba)|i(g(ht))|m(d(ir))|nd|s(et)|t(r(im))|un)|s(a(dd)|c(o(pe)|r(n|e(e(n(c(o(py|n(t(r(ol)))))|e(v(e(nt)))|i(n(fo))|g(l(p(r(oc))))|l(i(st)|o(ck))|p(tr)|r(es)|s(et|y(nc))|u(n(l(o(ck)))))))))|e(c(o(nd))|ek|l(e(ct))|t(d(a(te))|e(n(v(i(r(on)))))|m(o(u(se)))|t(i(me))))|gn|h(a(r(ed))|e(ll)|o(rt)|r|l)|i(n(g(le))|z(e(of)))|l(e(ep))|p(a(ce)|c)|qr|t(a(t(ic))|d(c(a(ll)))|ep|op|r(i(ng)|p(tr)))|ub|w(ap)|y(s(t(em))))|t(a[bn]|h(en|is|r(e(a(d(c(r(e(a(te))))|w(a(it)))))))|i(m(e(s(e(r(i(al))))|v(a(l(ue)))|r)))|o|r(a(ns)|im|ue)|y(pe))|u(b(o(u(nd))|y(te))|c(a(se))|i(n(t(e(g(er)))))|l(o(n(g(i(nt)))))|n(i(on)|l(o(ck))|s(i(g(n(ed))))|t(il))|s(h(o(rt))|i(ng)))|v(a(_(a(rg)|f(i(r(st)))|n(e(xt)))|l(l(ng)|i(nt)|u(i(nt)|l(ng)))|r(p(tr)))|i(ew))|w(a(it)|b(in)|c(hr)|e(e(k(d(a(y(n(a(me)))))))|nd)|h(i(le)|ex)|i(d(th)|n(d(o(w(t(i(t(le))))))|p(ut))|th)|o(ct)|r(i(te))|s(p(a(ce))|t(r(i(ng)))))|x(or)|y(e(ar))|z(s(t(r(i(ng))))))\\b"
             },
             "parens": {
                 "begin": "\\(",
