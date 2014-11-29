@@ -20,7 +20,7 @@
             "include": "#comments"
         },
         {
-            "match": "\\b(end|case|continue|default|do|else|for|goto|if|then|end if|return|select|wend|with|while|as)\\b",
+            "match": "\\b(end|case|continue|default|do|loop|else|for|goto|if|elseif|then|end if|return|next|function|sub|until|select|wend|with|while|as)\\b",
             "name": "keyword.control.freebasic"
         },
         {
@@ -353,7 +353,28 @@
                     {
                         "match": "\\'/.*\\n",
                         "name": "invalid.illegal.stray-comment-end.freebasic"
-                    }
+                    },
+                    {
+                        "begin": "(^[ \\t]+)?(?=')",
+                        "beginCaptures": {
+                            "1": {
+                                "name": "punctuation.whitespace.comment.leading.freebasic"
+                            }
+                        },
+                        "end": "(?!\\G)",
+                        "patterns": [
+                            {
+                                "begin": "'",
+                                "beginCaptures": {
+                                    "0": {
+                                        "name": "punctuation.definition.comment.freebasic"
+                                    }
+                                },
+                                "end": "\\n|(?=\\?>)",
+                                "name": "comment.line.double-slash.freebasic"
+                            }
+                        ]
+                    },
                 ]
             },
             "disabled": {
